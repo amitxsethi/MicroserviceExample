@@ -49,17 +49,43 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <docker.image.prefix>springio</docker.image.prefix>
+        <docker.tag.prefix>amit.x.sethi</docker.tag.prefix>
+
     </properties>
 
 
     <build>
         <plugins>
+
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.3.6</version>
+                <configuration>
+                    <repository>amit.x.sethi/${project.artifactId}</repository>
+                </configuration>
+                <executions>
+                        <execution>
+                            <id>default</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>build</goal>
+                                <goal>tag</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+            </plugin>
         </plugins>
+
     </build>
+
+
 
     <repositories>
         <repository>
